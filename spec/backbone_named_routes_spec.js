@@ -49,7 +49,7 @@ describe("Backbone named routes extension", function() {
 
       Backbone.history.options = null;
 
-      spyOn(Backbone.history, 'start').andCallFake(function(options) {
+      spyOn(Backbone.history, 'start').and.callFake(function(options) {
         Backbone.history.options = options;
       });
     });
