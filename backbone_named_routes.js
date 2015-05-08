@@ -15,6 +15,14 @@
 
   var PATTERNS = {};
 
+  var addRoutes = function(routes) {
+    for (var path in routes) {
+      if (routes.hasOwnProperty(path)) {
+        Backbone.NamedRoutes.addRoute(routes[path], path);
+      }
+    }
+  };
+
   var addRoute = function(name, route, options) {
     options = options || {};
 
@@ -94,15 +102,13 @@
   var initNamedRoutes = resetNamedRoutes = function() {
     PATTERNS = {};
 
-    Backbone.NamedRoutes =
-    Backbone.View.prototype.helper =
-    Backbone.Model.prototype.helper =
-    Backbone.Router.prototype.helper =
-    Backbone.Collection.prototype.helper = {
+    Backbone.NamedRoutes = {
       VERSION: '0.1.7',
       addRoute: addRoute,
+      addRoutes: addRoutes,
       resetNamedRoutes: resetNamedRoutes
     };
+
   };
 
   initNamedRoutes();

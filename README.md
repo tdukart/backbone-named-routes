@@ -12,62 +12,30 @@ Include the plugin after all dependencies.
 
 Given a Backbone Router:
 
+    var routes = {
+      "help":                 "help",    // #help
+      "search/:query":        "search",  // #search/kiwis
+      "search/:query/p:page": "search"   // #search/kiwis/p7
+    };
+      
+    Backbone.NamedRoutes.addRoutes(routes);
+
     var Workspace = Backbone.Router.extend({
-      routes: {
-        "help":                 "help",    // #help
-        "search/:query":        "search",  // #search/kiwis
-        "search/:query/p:page": "search"   // #search/kiwis/p7
-      }
+      routes: routes
     });
 
 
-This plugin provides a `helper` attribute that provides named routes which can be
+This plugin provides a new property of the `Backbone` global that provides named routes
+which can be accessed through
 
-... accessed on Backbone Routers
-
-    var router = new Workspace();
-
-    router.helper.helpPath();
-    => "/help"
-
-    router.helper.searchPath("kiwis");
-    => "/search/kiwis"
-
-    router.helper.searchPath("kiwis", 7);
-    => "/search/kiwis/p7"
-
-
-... accessed on Backbone Views
-
-    var view = new Backbone.View();
-
-    view.helper.helpPath();
-    => "/help"
-
-    view.helper.searchPath("kiwis");
-    => "/search/kiwis"
-
-    view.helper.searchPath("kiwis", 7);
-    => "/search/kiwis/p7"
-
-
-... mixed into Backbone Models, Collections, and other objects.
-
-    _(Backbone.Model.prototype).extend({
-      helper: Backbone.NamedRoutes
-    });
-
-    var model = new Backbone.Model();
-
-    model.helper.helpPath();
-    => "/help"
-
-    model.helper.searchPath("kiwis");
-    => "/search/kiwis"
-
-    model.helper.searchPath("kiwis", 7);
-    => "/search/kiwis/p7"
-
+    Backbone.NamedRoutes.helpPath()
+    => "help"
+    
+    Backbone.NamedRoutes.search('kiwis')
+    => "search/kiwis"
+    
+    Backbone.NamedRoutes.search('kiwis', 7)
+    => "search/kiwis/p7"
 
 ## Query parameters
 
